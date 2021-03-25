@@ -2,8 +2,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
+import java.awt.*;
 
 /**
  * This is a basic robot program that operates a tank-drive style robot (motors
@@ -18,6 +21,7 @@ public class Robot extends TimedRobot {
      */
     private Joystick joystick = new Joystick(0);
 
+
     /**
      * PWMVictorSPX is the class that represents a Victor SPX motor controller. This
      * code defines two motor controllers plugged into port 0 and 1 of the roboRIO's
@@ -25,6 +29,16 @@ public class Robot extends TimedRobot {
      */
     private PWMVictorSPX leftMotor = new PWMVictorSPX(0);
     private PWMVictorSPX rightMotor = new PWMVictorSPX(1);
+    // the module number corresponds to the CanID of the PCM  - ex: ours is 8
+    private Solenoid solenoid0 = new Solenoid(8,0);
+    // note that just by creating an instance of a solenoid it automatically makes the compressor work
+
+    // this solenoid will be used as a catch (press once = on until you press it again)
+    private Solenoid solenoid1 = new Solenoid(8,1);
+    // used to turn the latch on or off
+    boolean solenoidLatched = false;
+
+
 
     /**
      * DifferentialDrive is a very simple class that operates a tank drive robot's
@@ -88,12 +102,28 @@ public class Robot extends TimedRobot {
             turn = 0;
         }
 
+        // this is set up so that whenever the A button on a logitech joystick is held, solenoid0 will activate
+        if(joystick.getRawButton(2)){
+            solenoid0.set(true);
+        } else {
+            solenoid0.set(false);
+        }
+
+        // this is set up so that whenever the logitech B button is pressed, solenoid1 will activate until pressed again
+        if(joystick.getRawButtonPressed(3)){
+            solenoidLatched = !solenoidLatched;
+            System.out.println(" aaa ");
+        }
+        solenoid1.set(solenoidLatched);
+
+
+
         /**
          * This line actually drives the robot based on joystick input
          */
         drivetrain.arcadeDrive(throttle, turn);
 
-        System.out.println("Throttle: " + throttle + "\tTurn: " + turn); // prints out the throttle and turn values
-        System.out.println("Left Power: " + leftMotor.get() + "\tRight Power" + rightMotor.get()); // prints the raw power sent to the left and right motor
+        //System.out.println("Throttle: " + throttle + "\tTurn: " + turn); // prints out the throttle and turn values
+        //System.out.println("Left Power: " + leftMotor.get() + "\tRight Power" + rightMotor.get()); // prints the raw power sent to the left and right motor
     }
 }
