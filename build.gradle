@@ -1,3 +1,5 @@
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
+
 plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2021.2.2"
@@ -51,10 +53,17 @@ repositories {
 dependencies {
     implementation wpi.deps.wpilib()
     implementation wpi.deps.vendor.java()
+
+    nativeZip wpi.deps.wpilibJni(wpi.platforms.roborio)
+    nativeDesktopZip wpi.deps.wpilibJni(wpi.platforms.desktop)
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
+
     testImplementation 'junit:junit:4.12'
     implementation 'org.yaml:snakeyaml:1.23'
+
+    simulation wpi.deps.sim.gui(wpi.platforms.desktop, false)
+    simulation wpi.deps.sim.driverstation(wpi.platforms.desktop, false)
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
@@ -63,4 +72,27 @@ dependencies {
 jar {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
+}
+
+processResources {
+    include '**/*.config.yml'
+    eachFile { fileCopyDetails ->
+
+    }
+}
+
+task run(type: JavaExec) {
+    String jniDir = "${project.buildDir}/tmp/jniExtractDir"
+    environment "PATH", jniDir
+    String hal = fileTree(dir: "${project.buildDir}/tmp/expandedArchives", include: 'halsim*/**/*.*').asPath
+    if (!DefaultNativePlatform.currentOperatingSystem.isWindows()) {
+        environment "LD_LIBRARY_PATH", jniDir
+        environment "DYLD_FALLBACK_LIBRARY_PATH", jniDir
+        environment "DYLD_LIBRARY_PATH", jniDir
+    }
+    environment "HALSIM_EXTENSIONS", hal
+    environment "ROBOT_NAME", "zodiac_swerve"
+    dependsOn(jar, simulateExternalJava)
+    classpath = files(jar)
+    jvmArgs "-Djava.library.path=${jniDir}"
 }

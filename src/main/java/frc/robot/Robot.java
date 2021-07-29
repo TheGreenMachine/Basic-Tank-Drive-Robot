@@ -31,19 +31,6 @@ public class Robot extends TimedRobot {
     // note that just by creating an instance of a solenoid it automatically makes the compressor work
 
 
-
-    /**
-     * PWMVictorSPX is the class that represents a Victor SPX motor controller. This
-     * code defines two motor controllers plugged into port 0 and 1 of the roboRIO's
-     * PWM port, where the left motor controller is port 0 and the right is port 1
-     */
-
-
-    /**
-     * DifferentialDrive is a very simple class that operates a tank drive robot's
-     * drivetrain. This creates a new DifferentialDrive system using your left and
-     * right motor controllers
-     */
     private Drive drivetrain;
 
     /**

@@ -3,7 +3,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.team1816.lib.hardware.RobotFactory;
-import com.team1816.lib.hardware.components.pcm.ISolenoid;
+
 
 public class Drive {
 
@@ -15,7 +15,6 @@ public class Drive {
 
     private IMotorController leftMotor = factory.getMotor("drivetrain", "leftMain");
     private IMotorController rightMotor = factory.getMotor("drivetrain", "rightMain");
-    // the module number corresponds to the CanID of the PCM  - ex: ours is 8
 
     public Drive() {
         leftMotor.setInverted(true);
@@ -26,6 +25,5 @@ public class Drive {
     public void arcadeDrive(double throttle, double turn) {
         leftMotor.set(ControlMode.PercentOutput, throttle + turn);
         rightMotor.set(ControlMode.PercentOutput, throttle - turn);
-
     }
 }
