@@ -1,5 +1,8 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.IMotorController;
+import com.team1816.lib.hardware.RobotFactory;
+import com.team1816.lib.hardware.components.pcm.ISolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -14,6 +17,9 @@ import java.awt.*;
  * on the stick will control throttle and pushing left-right will turn the robot
  */
 public class Robot extends TimedRobot {
+
+
+    private static RobotFactory factory = RobotFactory.getInstance();
     /**
      * This creates a new Joystick that is plugged into port '0'. You can change the
      * port IDs in the NI Driver Station software. We will be using the Logitech
@@ -21,23 +27,16 @@ public class Robot extends TimedRobot {
      */
     private Joystick joystick = new Joystick(0);
 
+    private ISolenoid solenoid0 = factory.getSolenoid("arm", "arm");
+    // note that just by creating an instance of a solenoid it automatically makes the compressor work
+
+
 
     /**
      * PWMVictorSPX is the class that represents a Victor SPX motor controller. This
      * code defines two motor controllers plugged into port 0 and 1 of the roboRIO's
      * PWM port, where the left motor controller is port 0 and the right is port 1
      */
-    private PWMVictorSPX leftMotor = new PWMVictorSPX(0);
-    private PWMVictorSPX rightMotor = new PWMVictorSPX(1);
-    // the module number corresponds to the CanID of the PCM  - ex: ours is 8
-    private Solenoid solenoid0 = new Solenoid(8,0);
-    // note that just by creating an instance of a solenoid it automatically makes the compressor work
-
-    // this solenoid will be used as a catch (press once = on until you press it again)
-    private Solenoid solenoid1 = new Solenoid(8,1);
-    // used to turn the latch on or off
-    boolean solenoidLatched = false;
-
 
 
     /**
@@ -45,7 +44,7 @@ public class Robot extends TimedRobot {
      * drivetrain. This creates a new DifferentialDrive system using your left and
      * right motor controllers
      */
-    DifferentialDrive drivetrain = new DifferentialDrive(leftMotor, rightMotor);
+    private Drive drivetrain;
 
     /**
      * Here we will make two doubles(decimal numbers) to represent our robot's
@@ -60,20 +59,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-        /**
-         * This sets one side to run the opposite direction of each other. You will
-         * change the true / false values depending on how your robot is set up and
-         * wired
-         */
-        leftMotor.setInverted(true);
-        rightMotor.setInverted(false);
-
-        /*
-         * WPI drivetrain classes defaultly assume left and right are opposite. call
-         * this so we can apply positive values to both sides when moving forward. DO
-         * NOT CHANGE THIS LINE
-         */
-        drivetrain.setRightSideInverted(true);
+        drivetrain = new Drive();
     }
 
     /**
@@ -108,13 +94,6 @@ public class Robot extends TimedRobot {
         } else {
             solenoid0.set(false);
         }
-
-        // this is set up so that whenever the logitech B button is pressed, solenoid1 will activate until pressed again
-        if(joystick.getRawButtonPressed(3)){
-            solenoidLatched = !solenoidLatched;
-            System.out.println(" aaa ");
-        }
-        solenoid1.set(solenoidLatched);
 
 
 
