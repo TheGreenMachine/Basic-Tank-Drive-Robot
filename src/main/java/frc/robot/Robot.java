@@ -4,10 +4,7 @@ import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.team1816.lib.hardware.RobotFactory;
 import com.team1816.lib.hardware.components.pcm.ISolenoid;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import java.awt.*;
 
@@ -26,10 +23,10 @@ public class Robot extends TimedRobot {
      * Extreme 3D Pro Flight Stick for this demo code
      */
     private Joystick joystick = new Joystick(0);
-
-    private ISolenoid solenoid0 = factory.getSolenoid("arm", "arm");
-    // note that just by creating an instance of a solenoid it automatically makes the compressor work
-
+//
+//    private ISolenoid solenoid0 = factory.getSolenoid("arm", "arm");
+//    // note that just by creating an instance of a solenoid it automatically makes the compressor work
+//
 
     private Drive drivetrain;
 
@@ -74,14 +71,14 @@ public class Robot extends TimedRobot {
         if (Math.abs(turn) < 0.10) {
             turn = 0;
         }
-
-        // this is set up so that whenever the A button on a logitech joystick is held, solenoid0 will activate
-        if(joystick.getRawButton(2)){
-            solenoid0.set(true);
-        } else {
-            solenoid0.set(false);
-        }
-
+//
+//        // this is set up so that whenever the A button on a logitech joystick is held, solenoid0 will activate
+//        if(joystick.getRawButton(2)){
+//            solenoid0.set(true);
+//        } else {
+//            solenoid0.set(false);
+//        }
+//
 
 
         /**
