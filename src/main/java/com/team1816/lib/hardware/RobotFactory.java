@@ -244,7 +244,11 @@ public class RobotFactory {
     }
 
     public SubsystemConfig getSubsystem(String subsystemName) {
-        var subsystem = config.subsystems.get(subsystemName);
+        SubsystemConfig subsystem = null;
+        // yaml is missing subsystems so just use default
+        if(config.subsystems != null) {
+            subsystem = config.subsystems.get(subsystemName);
+        }
         if (subsystem == null) {
             subsystem = new SubsystemConfig(false);
         }
