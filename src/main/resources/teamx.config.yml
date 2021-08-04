@@ -1,0 +1,7 @@
+subsystems:
+  drivetrain:
+    talons:
+      leftMain: 13
+      rightMain: 14
+constants:
+  verbose: 0
