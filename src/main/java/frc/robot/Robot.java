@@ -1,14 +1,12 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
-import com.team1816.lib.hardware.components.pcm.ISolenoid;
 import com.team1816.lib.hardware.RobotFactory;
+import com.team1816.lib.hardware.components.pcm.ISolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
-//import sun.net.ext.ExtendedSocketOptions;
 
 import java.awt.*;
-
 /**
  * This is a basic robot program that operates a tank-drive style robot (motors
  * on each side) with the arcade drive joystick format - where pushing forwards

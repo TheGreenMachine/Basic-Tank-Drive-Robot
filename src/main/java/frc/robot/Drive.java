@@ -13,8 +13,8 @@ public class Drive {
 
     private static Drive INSTANCE;
 
-    private IMotorController leftMotor = factory.getMotor("drivetrain", "leftMain");
-    private IMotorController rightMotor = factory.getMotor("drivetrain", "rightMain");
+    private IMotorController leftMotor = factory.getMotor(NAME, "leftMain");
+    private IMotorController rightMotor = factory.getMotor(NAME, "rightMain");
 
     public Drive() {
         leftMotor.setInverted(true);
