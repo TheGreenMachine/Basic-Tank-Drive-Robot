@@ -90,4 +90,9 @@ public class Robot extends TimedRobot {
         //System.out.println("Throttle: " + throttle + "\tTurn: " + turn); // prints out the throttle and turn values
         //System.out.println("Left Power: " + leftMotor.get() + "\tRight Power" + rightMotor.get()); // prints the raw power sent to the left and right motor
     }
+
+    @Override
+    public void disabledInit() {
+        drivetrain.disableMotors();
+    }
 }

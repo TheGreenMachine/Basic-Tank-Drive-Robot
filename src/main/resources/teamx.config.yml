@@ -1,7 +1,13 @@
 subsystems:
   drivetrain:
+    implemented: true
     talons:
       leftMain: 13
+      leftFollower: 12
       rightMain: 14
+      rightFollower: 15
+    invertMotor:
+      ##- rightMain
+      ##- leftMain
 constants:
   verbose: 0
