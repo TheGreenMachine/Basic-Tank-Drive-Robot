@@ -23,14 +23,15 @@ public class Drive {
     }
 
     public void arcadeDrive(double throttle, double turn) {
-        leftMotor.set(ControlMode.PercentOutput, throttle*.5 - turn*.5);
-        rightMotor.set(ControlMode.PercentOutput, throttle*.5 + turn*.5);
+        double percentThrottle = 0.5;
+        leftMotor.set(ControlMode.PercentOutput, (throttle - turn)*percentThrottle);
+        rightMotor.set(ControlMode.PercentOutput, (throttle + turn)*percentThrottle);
     }
     public synchronized void disableMotors() {
         leftMotor.set(ControlMode.Disabled, 0);
         rightMotor.set(ControlMode.Disabled, 0);
-        leftFollower.set(ControlMode.Disabled, 0);
-        rightFollower.set(ControlMode.Disabled, 0);
+        //leftFollower.set(ControlMode.Disabled, 0);
+        //rightFollower.set(ControlMode.Disabled, 0);
 
     }
 }

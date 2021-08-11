@@ -6,7 +6,7 @@ subsystems:
       leftFollower: 12
       rightMain: 14
       rightFollower: 15
-#    invertMotor:
+    invertMotor:
       ##- rightMain
       ##- leftMain
 constants:

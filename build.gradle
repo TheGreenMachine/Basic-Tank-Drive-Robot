@@ -91,7 +91,7 @@ task run(type: JavaExec) {
         environment "DYLD_LIBRARY_PATH", jniDir
     }
     environment "HALSIM_EXTENSIONS", hal
-    environment "ROBOT_NAME", "zodiac_swerve"
+    environment "ROBOT_NAME", "alpha"
     dependsOn(jar, simulateExternalJava)
     classpath = files(jar)
     jvmArgs "-Djava.library.path=${jniDir}"
