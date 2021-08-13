@@ -95,4 +95,9 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         drivetrain.disableMotors();
     }
+
+    @Override
+    public void testPeriodic() {
+        drivetrain.arcadeDrive(.3, 0);
+    }
 }

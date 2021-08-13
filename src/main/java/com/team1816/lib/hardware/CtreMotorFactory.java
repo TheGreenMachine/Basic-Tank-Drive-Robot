@@ -101,9 +101,10 @@ public class CtreMotorFactory {
             pidConfigList
         );
         System.out.println(
-            "Slaving talon on " + id + " to talon on " + master.getDeviceID()
-        );
+            "Slaving " + name + " to talon Id: "+ master.getDeviceID())
+        ;
         talon.follow(master);
+        talon.setInverted(master.getInverted());
         return talon;
     }
 
@@ -248,6 +249,7 @@ public class CtreMotorFactory {
 
         talonConfiguration.enableOptimizations = true;
 
+        System.out.println("Configuring motor " + name + " Id: " + motor.getDeviceID());
         motor.configFactoryDefault(kTimeoutMs);
 
         motor.overrideLimitSwitchesEnable(config.ENABLE_LIMIT_SWITCH);

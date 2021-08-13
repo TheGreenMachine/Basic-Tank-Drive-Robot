@@ -2,11 +2,11 @@ subsystems:
   drivetrain:
     implemented: true
     talons:
-      leftMain: 12
-      leftFollower: 13
+      leftMain: 13
+      leftFollower: 12
       rightMain: 14
       rightFollower: 15
-#    invertMotor:
+    invertMotor:
       ##- rightMain
       ##- leftMain
 constants:
