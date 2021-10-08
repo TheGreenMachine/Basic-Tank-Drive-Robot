@@ -3,5 +3,9 @@ subsystems:
     talons:
       leftMain: 13
       rightMain: 14
+  canon:
+    invertMotor:
+      - mainFollower
+
 constants:
   verbose: 0
