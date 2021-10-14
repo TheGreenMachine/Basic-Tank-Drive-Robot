@@ -26,12 +26,15 @@ public class Drive {
         double percentThrottle = 0.5;
         leftMotor.set(ControlMode.PercentOutput, (throttle - turn)*percentThrottle);
         rightMotor.set(ControlMode.PercentOutput, (throttle + turn)*percentThrottle);
+        leftFollower.set(ControlMode.PercentOutput, (throttle - turn)*percentThrottle);
+        rightFollower.set(ControlMode.PercentOutput, (throttle - turn)*percentThrottle);
+
     }
     public synchronized void disableMotors() {
         leftMotor.set(ControlMode.Disabled, 0);
         rightMotor.set(ControlMode.Disabled, 0);
-        //leftFollower.set(ControlMode.Disabled, 0);
-        //rightFollower.set(ControlMode.Disabled, 0);
+        leftFollower.set(ControlMode.Disabled, 0);
+        rightFollower.set(ControlMode.Disabled, 0);
 
     }
 }

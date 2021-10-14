@@ -30,6 +30,7 @@ public class Robot extends TimedRobot {
 //
 
     private Drive drivetrain;
+    private Shooter shooter;
 
     /**
      * Here we will make two doubles(decimal numbers) to represent our robot's
@@ -45,6 +46,7 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         drivetrain = new Drive();
+        shooter = new Shooter();
     }
 
     /**
@@ -86,6 +88,11 @@ public class Robot extends TimedRobot {
          * This line actually drives the robot based on joystick input
          */
         drivetrain.arcadeDrive(throttle, turn);
+        if(joystick.getTop()){
+            shooter.spin(joystick.getTop());
+        } else if(joystick.getTrigger()){
+            shooter.collect(joystick.getTrigger());
+        }
 
         //System.out.println("Throttle: " + throttle + "\tTurn: " + turn); // prints out the throttle and turn values
         //System.out.println("Left Power: " + leftMotor.get() + "\tRight Power" + rightMotor.get()); // prints the raw power sent to the left and right motor

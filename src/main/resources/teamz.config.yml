@@ -7,7 +7,15 @@ subsystems:
       rightMain: 14
       rightFollower: 15
     invertMotor:
-      ##- rightMain
-      ##- leftMain
+      - rightMain
+      - leftMain
+  shooter:
+    implemented: true
+    talons:
+      leftShooter: 2
+      rightShooter: 3
+    invertMotor:
+      - rightShooter
+      - leftShooter
 constants:
   verbose: 0
