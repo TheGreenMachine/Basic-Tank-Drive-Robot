@@ -10,10 +10,14 @@ public class Canon {
     private static RobotFactory factory = RobotFactory.getInstance();
     private static final String NAME = "cannon";
 
+    //Pneumatic Cylinder
+    private final int channel = 0;
 
-    private Solenoid solenoid;
-    private IMotorController mainShooter  = factory.getMotor(NAME, "mainShooter");
-    private IMotorController mainFollower  = factory.getMotor(NAME, "mainFollower", mainShooter);
+    private Solenoid solenoid = new Solenoid(channel);
+    private boolean startPneumaticCylinder = false;
+    //Motors
+    private final IMotorController mainShooter  = factory.getMotor(NAME, "mainShooter");
+    private final IMotorController mainFollower  = factory.getMotor(NAME, "mainFollower", mainShooter);
 
     private static Canon INSTANCE;
     private  double revVal;
@@ -29,8 +33,10 @@ public class Canon {
 
 
     public Canon( double val){
-        solenoid = new Solenoid(0);
-        solenoid.set(false);
+        solenoid = new Solenoid(channel);
+        Compressor compressor = new Compressor(channel);
+        solenoid.set(startPneumaticCylinder);
+
         revVal = val;
 
     }

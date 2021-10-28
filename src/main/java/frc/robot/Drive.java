@@ -7,14 +7,14 @@ import com.team1816.lib.hardware.RobotFactory;
 
 public class Drive {
 
-    private static RobotFactory factory = RobotFactory.getInstance();
+    private static final RobotFactory factory = RobotFactory.getInstance();
 
     private static final String NAME = "drivetrain";
 
     private static Drive INSTANCE;
 
-    private IMotorController leftMotor = factory.getMotor(NAME, "leftMain");
-    private IMotorController rightMotor = factory.getMotor(NAME, "rightMain");
+    private final IMotorController leftMotor = factory.getMotor(NAME, "leftMain");
+    private final IMotorController rightMotor = factory.getMotor(NAME, "rightMain");
 
     public Drive() {
         leftMotor.setInverted(true);
