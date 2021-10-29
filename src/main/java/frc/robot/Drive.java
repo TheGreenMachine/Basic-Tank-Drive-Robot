@@ -15,6 +15,9 @@ public class Drive {
 
     private IMotorController leftMotor = factory.getMotor(NAME, "leftMain");
     private IMotorController rightMotor = factory.getMotor(NAME, "rightMain");
+    private IMotorController leftFollower = factory.getMotor(NAME, "leftFollower",leftMotor);
+    private IMotorController rightFollower = factory.getMotor(NAME,"rightFollower",rightMotor);
+
 
     public Drive() {
         leftMotor.setInverted(true);

@@ -1,3 +1,4 @@
+
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
@@ -7,7 +8,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 import java.awt.*;
-
 /**
  * This is a basic robot program that operates a tank-drive style robot (motors
  * on each side) with the arcade drive joystick format - where pushing forwards
@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
 //
 
     private Drive drivetrain;
-
+    private Canon canon;
     /**
      * Here we will make two doubles(decimal numbers) to represent our robot's
      * throttle and turn values. These will be values from -1 to 1
@@ -44,6 +44,7 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         drivetrain = new Drive();
+        canon = new Canon(1.0);
     }
 
     /**
@@ -84,6 +85,8 @@ public class Robot extends TimedRobot {
         /**
          * This line actually drives the robot based on joystick input
          */
+        canon.Intake(joystick.getRawButton(1));
+        canon.revUp(joystick.getRawButton(2));
         drivetrain.arcadeDrive(throttle, turn);
 
         //System.out.println("Throttle: " + throttle + "\tTurn: " + turn); // prints out the throttle and turn values
