@@ -34,7 +34,6 @@ public class Canon {
 
     public Canon( double val){
         solenoid = new Solenoid(channel);
-        Compressor compressor = new Compressor(channel);
         solenoid.set(startPneumaticCylinder);
 
         revVal = val;
