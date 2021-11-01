@@ -13,15 +13,16 @@ public class Canon {
     //Pneumatic Cylinder
     private final int channel = 0;
 
-    private Solenoid solenoid = new Solenoid(channel);
+    private Solenoid solenoid;
+   // Compressor compressor;
     private boolean startPneumaticCylinder = false;
+
     //Motors
     private final IMotorController mainShooter  = factory.getMotor(NAME, "mainShooter");
     private final IMotorController mainFollower  = factory.getMotor(NAME, "mainFollower", mainShooter);
 
     private static Canon INSTANCE;
-    private  double revVal;
-
+    private double revVal;
 
     public static Canon getInstance() {
         if (INSTANCE == null) {
@@ -29,38 +30,31 @@ public class Canon {
         }
         return INSTANCE;
     }
-    public Canon (){}
+    public Canon () {}
 
-
-    public Canon( double val){
+    public Canon(double val) {
         solenoid = new Solenoid(channel);
-
         solenoid.set(startPneumaticCylinder);
-
+       // compressor = new Compressor(channel);
         revVal = val;
-
     }
 
-
-
-    public void revUp(boolean Revving){
-
+    public void revUp(boolean Revving) {
         if (Revving){
             mainShooter.set(ControlMode.PercentOutput, revVal);
         }
     }
-    public void Shoot (boolean buttonPressed){
 
+    public void Shoot (boolean buttonPressed) {
         if (buttonPressed){
             solenoid.toggle();
         }
     }
 
-    public void Intake(boolean buttonPressed){
-        if (buttonPressed) {
+    public void Intake(boolean buttonPressed) {
+        if (buttonPressed){
             mainShooter.set(ControlMode.PercentOutput, revVal*-0.2);
         }
-
     }
 
 
