@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
 
     private Drive drivetrain;
     private Shooter shooter;
+    private Collector collector;
 
     /**
      * Here we will make two doubles(decimal numbers) to represent our robot's
