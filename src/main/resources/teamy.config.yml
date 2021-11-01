@@ -1,17 +1,17 @@
 subsystems:
     drivetrain:
         talons:
-            leftMain: 3
-            rightMain: 2
-            leftFollower: 13
-            rightFollower: 1
+            leftMain: 17
+            rightMain: 14
+            leftFollower: 1
+            rightFollower: 15
         invertMotor:
             - rightMain
     canon:
         implemented: false
         talons:
-            mainShooter: 5
-            mainFollower: 4
+            mainShooter: 3
+            mainFollower: 2
         invertMotor:
             - mainFollower
 

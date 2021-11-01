@@ -33,8 +33,8 @@ public class Canon {
     public Canon () {}
 
     public Canon(double val) {
-        solenoid = new Solenoid(channel);
-        solenoid.set(startPneumaticCylinder);
+        //solenoid = new Solenoid(channel);
+        //solenoid.set(startPneumaticCylinder);
        // compressor = new Compressor(channel);
         revVal = val;
     }
