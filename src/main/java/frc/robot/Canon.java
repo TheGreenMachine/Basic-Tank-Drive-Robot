@@ -23,9 +23,9 @@ public class Canon {
     private  double revVal;
 
 
-    public static Canon getInstance() {
+    public static Canon getInstance(double val) {
         if (INSTANCE == null) {
-            INSTANCE = new Canon();
+            INSTANCE = new Canon(val);
         }
         return INSTANCE;
     }

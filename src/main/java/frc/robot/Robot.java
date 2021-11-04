@@ -43,8 +43,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-        drivetrain = new Drive();
-        canon = new Canon(1.0);
+        drivetrain = Drive.getInstance();
+        canon = Canon.getInstance(0.7);
     }
 
     /**
